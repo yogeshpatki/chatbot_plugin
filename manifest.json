@@ -2,8 +2,8 @@
 	"manifest_version": 2,
 
 	  "name": "ChatBot",
-	  "description": "Click Here",
-	  "version": "1.0",
+	  "description": "Access smartbot from inside of website",
+	  "version": "1.1",
 
 	  "browser_action": {
 	    "default_icon": "icon.png"
@@ -11,13 +11,17 @@
 	  "content_scripts": [
 	  {
 	    "matches": [
-        "<all_urls>"
+        "https://qa01-www.barclaycardus.com/*"
       ],
-	    "js": ["jquery-2.2.3.min.js","content.js"]
+	    "js": ["js/jquery-2.2.3.min.js","js/content.js"],
+	    "css": ["css/main.css"]
 	  }
       ],
       "background": {
-		  "scripts": ["popup.js"]
-		}
+		  "scripts": ["js/background.js"]
+		},
+	"permissions": [ 
+ 	  "tabs"
+	]
 
 }
