@@ -5,8 +5,9 @@ chrome.runtime.onMessage.addListener(
     	if(request.url.indexOf("accountSummary") >= 0){
     		var data = getData();
     		loadContext(data);
-    		$('body').append('<div class="chatBot" id="chatBot"> <span id="chatMessage">Click Here To Chat</span></div>');
     	}
+    		$('body').append('<div class="chatBot" id="chatBot"> <span id="chatMessage">Click Here To Chat</span></div>');
+    		bindEvent();
     }
   }
 );
@@ -30,17 +31,11 @@ var loadContext = function(context){
 	});
 }
 
-$('.chatBot').on('click',function(){
+var bindEvent = function(){ $('.chatBot').on('click',function(){
 	var that = $(this);
-	that.html(
-                '<li class="self">' +
-            '<div class="avatar"><img src="http://i.imgur.com/HYcn9xO.png" draggable="false"/></div>' +
-                '<div class="msg">'+
-                    '<p>'+"message"+'</p>' +
-                '</div>'+
-            '</div>' +
-            '</li>'
-            );
-            $(window).scrollTop(10000000000000);
+	that.css("height","400px");
+	that.html('<iframe class="chatWindow card1" src="https://fuzzychat.herokuapp.com/"> </iframe>');
+            
 
 });
+}
