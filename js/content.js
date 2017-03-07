@@ -6,8 +6,19 @@ chrome.runtime.onMessage.addListener(
     		var data = getData();
     		loadContext(data);
     	}
-    		$('body').append('<div class="chatBot" id="chatBot"> <span id="chatMessage">Click Here To Chat</span></div>');
-    		bindEvent();
+		$('body').append('<div class="chatBot" id="chatBot"> <span id="chatMessage">Click Here To Chat</span></div>');
+		bindEvent();
+		$('#accountTile').attr('data-step',1);
+		$('#accountTile').attr('data-intro','Your balance is displayed here');
+		$('#accountTile').attr('data-position','right');
+		$('#paymentTile').attr('data-step',2);
+		$('#paymentTile').attr('data-intro','This displays your current payment due.');
+		$('#paymentTile').attr('data-position','right');
+		$('#activityTile').attr('data-step',3);
+		$('#activityTile').attr('data-intro','These are  you recent activities.');
+		$('#activityTile').attr('data-position','right');
+
+
     }
   }
 );
@@ -39,3 +50,9 @@ var bindEvent = function(){ $('.chatBot').on('click',function(){
 
 });
 }
+
+window.onmessage = function(e){
+    if (e.data == 'tourNeeded') {
+        introJs().start();
+    }
+};
