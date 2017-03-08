@@ -2,6 +2,7 @@
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if( request.message === "clicked_browser_action" ) {
+    	
     	if(request.url.indexOf("accountSummary") >= 0){
     		var data = getData();
     		loadContext(data);	
@@ -41,29 +42,16 @@ var bindEvent = function(){ $('.chatBot').on('click',function(){
 });
 }
 
-function startAccountSummaryTour(){
-	var intro = introJs();
-	intro.setOptions(getTourSteps().accountSummaryTourSteps);
-	intro.onchange(function(data){
-		console.log(data);
-	});
-	intro.start();
-}
-
-function startBenefitCenterTour(){
-	var intro = introJs();
-	intro.setOptions(getTourSteps().rewardsHubSteps);
-	intro.onchange(function(data){
-		console.log(data);
-	});
-	intro.start();
-}
 
 function startTour(tourName) {
 	if(tourName == "accountsummary"){
 		startAccountSummaryTour();
 	}else if(tourName == "rewardsHub"){
 		startBenefitCenterTour();
+	}else if(tourName == "pinChange"){
+		startPinChangeTour();
+	}else if(tourName == 'rewardsActivity'){
+		startRewardsActivityTour();
 	}
 }
 window.onmessage = function(e){
@@ -71,49 +59,3 @@ window.onmessage = function(e){
     	startTour(e.data.tourName);   
     }
 };
-
-function getTourSteps(){
-var tourSteps = {
-	accountSummaryTourSteps : {
-		steps : [
-		  {
-            element: '#accountTile',
-            intro: "Your balance is displayed here",
-            position: 'right'
-          },
-          {
-            element: '#paymentTile',
-            intro: 'This displays your current payment due.',
-            position: 'left'
-          },
-          {
-            element: '#activityTile',
-            intro: "These are  you recent activities.",
-            position: 'right'
-          }
-		
-		]
-	},
-	rewardsHubSteps : {
-		steps : [
-		  {
-            element: document.querySelectorAll('.benefits-center-tile.row')[0],
-            intro: "This is your Rewards Summary in a nutshell.",
-            position: 'top'
-          },
-          {
-            element: document.querySelectorAll('.reward-tile-container.tile')[0],
-            intro: 'You can click this to see how to earn rewards.',
-            position: 'right'
-          },
-          {
-            element: document.querySelectorAll('.reward-tile-container.tile')[1],
-            intro: "This will help you understand how to use your rewards.",
-            position: 'left'
-          }
-		
-		]	
-	} 
-}
-return tourSteps;
-}

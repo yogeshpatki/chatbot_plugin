@@ -12,9 +12,10 @@
 	  {
 	    "matches": [
         "https://qa01-www.barclaycardus.com/*",
-        "https://qa02-www.barclaycardus.com/*"
+        "https://qa02-www.barclaycardus.com/*",
+        "https://www.barclaycardus.com/*"
       ],
-	    "js": ["js/jquery-2.2.3.min.js","js/content.js","js/intro.min.js"],
+	    "js": ["js/jquery-2.2.3.min.js","js/intro.min.js","js/tours.js","js/content.js"],
 	    "css": ["css/main.css","css/introjs.min.css"]
 	  }
       ],
